@@ -33,7 +33,13 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: python:latest
                     shell: Bash
-                    command: pip --version
+                    command: |-
+                      pip --version
+                      python -m pip install --upgrade pip
+                      pip install -r requirements.txt
+                      pip install pytest
+                      cat /harness/test/test.py
+                      pytest /harness/test/test.py --junit-xml=report.xml
                     imagePullPolicy: IfNotPresent
         delegateSelectors:
           - docker-delegate
