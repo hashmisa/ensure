@@ -32,12 +32,8 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: python:latest
-                    shell: Python
-                    command: |-
-                      pip --version
-                      python -m pip install --upgrade pip
-                      pip install -r requirements.txt
-                      .
+                    shell: Bash
+                    command: pip --version
                     imagePullPolicy: IfNotPresent
         delegateSelectors:
           - docker-delegate
