@@ -21,7 +21,7 @@ pipeline:
             os: Linux
             arch: Amd64
           runtime:
-            type: Cloud
+            type: Docker
             spec: {}
           execution:
             steps:
@@ -30,12 +30,16 @@ pipeline:
                   name: Run_1
                   identifier: Run_1
                   spec:
-                    shell: Sh
+                    connectorRef: account.harnessImage
+                    image: python:latest
+                    shell: Python
                     command: |-
-                      ls -l 
-                      pwd
-                      cd /harness 
-                      ls -l
+                      python3 -m venv .venv
+                      . .venv/bin/activate
+
+                      python3 -m pip install -r requirements.txt
+                      python3 -m pip install -e .
+                    imagePullPolicy: IfNotPresent
         delegateSelectors:
           - docker-delegate
         when:
