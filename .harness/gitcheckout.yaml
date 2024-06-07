@@ -50,6 +50,7 @@ pipeline:
                     config: default
                     target:
                       type: repository
+                      workspace: /harness/ensure
                       detection: auto
                     advanced:
                       log:
