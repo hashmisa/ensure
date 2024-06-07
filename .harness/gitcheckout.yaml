@@ -46,10 +46,11 @@ pipeline:
                   name: Sonarqube_1
                   identifier: Sonarqube_1
                   spec:
-                    mode: extraction
+                    mode: orchestration
                     config: default
                     target:
                       type: repository
+                      workspace: /harness
                       detection: auto
                     advanced:
                       log:
