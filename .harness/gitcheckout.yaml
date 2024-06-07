@@ -42,26 +42,15 @@ pipeline:
                       pytest /harness/test/test.py --junit-xml=report.xml
                     imagePullPolicy: IfNotPresent
               - step:
-                  type: Sonarqube
-                  name: Sonarqube_1
-                  identifier: Sonarqube_1
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
                   spec:
-                    mode: orchestration
-                    config: default
-                    target:
-                      type: repository
-                      workspace: /harness
-                      detection: auto
-                    advanced:
-                      log:
-                        level: debug
-                      fail_on_severity: critical
-                    auth:
-                      access_token: <+secrets.getValue("sonarqube")>
-                      domain: https://sonarcloud.io/
-                      ssl: true
-                    tool:
-                      project_key: mujeerapp
+                    connectorRef: account.harnessImage
+                    image: sonarscannerbuildkite/sonarscanner
+                    shell: Sh
+                    command: sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=harness -Dsonar.projectName=harness -Dsonar.projectBaseDir=/harness/ensure -Dsonar.login=<+secrets.getValue("sonarqube")> -Dsonar.working.directory=/app/.scannerwork
+                    imagePullPolicy: Never
         delegateSelectors:
           - docker-delegate
         when:
