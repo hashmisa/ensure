@@ -46,21 +46,21 @@ pipeline:
                   name: Sonarqube_1
                   identifier: Sonarqube_1
                   spec:
-                    mode: orchestration
+                    mode: extraction
                     config: default
                     target:
                       type: repository
-                      workspace: /harness/ensure
                       detection: auto
                     advanced:
                       log:
-                        level: info
+                        level: debug
+                      fail_on_severity: critical
                     auth:
                       access_token: <+secrets.getValue("sonarqube")>
                       domain: https://sonarcloud.io/
                       ssl: true
                     tool:
-                      project_key: harness
+                      project_key: mujeerapp
         delegateSelectors:
           - docker-delegate
         when:
