@@ -55,7 +55,7 @@ pipeline:
                       log:
                         level: info
                     auth:
-                      access_token: <+secrets.getValue("project.harness")>
+                      access_token: <+secrets.getValue("harness")>
                       domain: https://sonarcloud.io/
                       ssl: true
                     tool:
