@@ -47,7 +47,7 @@ pipeline:
                   identifier: Run_2
                   spec:
                     connectorRef: account.harnessImage
-                    image: sonarscannerbuildkite/sonarscanner
+                    image: gcr.io/gcr-prod/harness/sonarqube-agent-job-runner
                     shell: Sh
                     command: sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=harness -Dsonar.projectName=harness -Dsonar.projectBaseDir=/harness/ensure -Dsonar.login=<+secrets.getValue("sonarqube")> -Dsonar.working.directory=/app/.scannerwork
                     imagePullPolicy: Never
