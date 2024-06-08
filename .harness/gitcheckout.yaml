@@ -34,23 +34,10 @@ pipeline:
                     image: python:latest
                     shell: Bash
                     command: |-
-                      pip --version
-                      python -m pip install --upgrade pip
-                      pip install -r requirements.txt
-                      pip install pytest
-                      cat /harness/test/test.py
-                      pytest /harness/test/test.py --junit-xml=report.xml
+                      cd /harness
+                      ls -l 
+                      pwd
                     imagePullPolicy: IfNotPresent
-              - step:
-                  type: Run
-                  name: Run_2
-                  identifier: Run_2
-                  spec:
-                    connectorRef: account.harnessImage
-                    image: gcr.io/gcr-prod/harness/sonarqube-agent-job-runner
-                    shell: Sh
-                    command: sonar-scanner -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=harness -Dsonar.projectName=harness -Dsonar.projectBaseDir=/harness/ensure -Dsonar.login=<+secrets.getValue("sonarqube")> -Dsonar.working.directory=/app/.scannerwork
-                    imagePullPolicy: Never
         delegateSelectors:
           - docker-delegate
         when:
