@@ -61,7 +61,7 @@ pipeline:
                       domain: https://sonarcloud.io/
                       ssl: true
                     tool:
-                      project_key: sonarqube
+                      project_key: narness
         delegateSelectors:
           - docker-delegate
         when:
