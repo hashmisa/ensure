@@ -40,6 +40,28 @@ pipeline:
                       pip install pytest
                       pytest /harness/test/test.py --junit-xml=report.xml
                     imagePullPolicy: IfNotPresent
+              - step:
+                  type: Sonarqube
+                  name: Sonarqube_1
+                  identifier: Sonarqube_1
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      workspace: /harness/ensure
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+                      args:
+                        cli: "  -Dsonar.organization=mujeerapp"
+                    auth:
+                      access_token: <+secrets.getValue("sonarqube")>
+                      domain: https://sonarcloud.io/
+                      ssl: true
+                    tool:
+                      project_key: sonarqube
         delegateSelectors:
           - docker-delegate
         when:
