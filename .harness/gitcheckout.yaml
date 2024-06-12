@@ -54,6 +54,8 @@ pipeline:
                     advanced:
                       log:
                         level: info
+                      args:
+                        cli: "  -Dsonar.organization=mujeerapp"
                     auth:
                       access_token: <+secrets.getValue("sonarqube")>
                       domain: https://sonarcloud.io/
