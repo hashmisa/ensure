@@ -39,6 +39,8 @@ pipeline:
                       pip install -r requirements.txt
                       pip install pytest
                       pytest /harness/test/test.py --junit-xml=report.xml
+
+                      terraform --version
                     imagePullPolicy: IfNotPresent
               - step:
                   type: Sonarqube
